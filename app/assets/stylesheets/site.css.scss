@@ -1,0 +1,46 @@
+// Place all the styles related to the site controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.ng-dirty.ng-invalid {
+	border-color: red;
+}
+.ng-dirty.ng-valid {
+	border-color: green;
+}
+
+
+#new-site-form {
+	padding: 50px;
+}
+
+#loading-img {
+	padding-left: 150px;
+}
+
+#loading-msg {
+	padding: 20px;
+	font-size: 18px;
+}
+
+#sample-panel {
+	padding: 30px;
+	margin-left: 50px;
+}
+
+.form-inline {
+	.form-group {
+		input {
+    	width: 300px;
+		}
+	}
+	.btn {
+		width: 200px;
+	}
+}
+
+#reloadbtn {
+	width: 200px;
+}
+em {
+  background: yellow;
+}

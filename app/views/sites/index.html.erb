@@ -1,0 +1,38 @@
+<h1 class="title">SwiftSearch - Add instant search capability</h1>
+<% title "SwiftSearch: Search instantly" %>
+<div id="new-site-form" ng-controller="SitesController">
+	<div class="row">
+		<div class="col-md-5">
+				<form name="siteForm" ng-submit="createSite()" ng-show='state=="init"' novalidate>
+					<div class="form-group">
+						<input type="url" ng-model="site.url" class="form-control" placeholder="Enter the url" required>
+					</div>
+					<div class="form-group">
+						<button name="button" ng-disabled="siteForm.$invalid" class="btn btn-primary btn-lg" >Setup Search</button>
+					</div>
+				</form>
+				<div ng-show='state=="processing"'>
+					<%= render "partials/loading" %>
+				</div>
+				<div class="form-errors" ng-show='state=="error"'>
+					<p ng-bind="site.error"></p>
+				</div>
+		</div>
+		<div class="col-md-5 col-md-offset-2">
+				<% if !@sites.empty? %>
+					<div class="panel panel-default" id="sample-panel">
+						<h2> Sample sites </h2>
+						<ul>
+							<% @sites.each do |site| %>
+							<li>
+								<%= link_to site.title, site %>
+							</li>
+							<% end %>
+						</ul>
+					</div>
+				<% end %>
+
+		</div>
+
+	</div>
+</div>
