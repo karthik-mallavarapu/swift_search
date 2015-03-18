@@ -1,14 +1,10 @@
 require 'open-uri'
-require 'elasticsearch/model'
 
 class Site < ActiveRecord::Base
 
 	extend FriendlyId
 
 	include Crawler
-
-	include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
 
 	has_many :pages, dependent: :destroy, extend: UpdateOrBuild
 
@@ -106,5 +102,3 @@ class Site < ActiveRecord::Base
   end
 
 end
-
-Site.import

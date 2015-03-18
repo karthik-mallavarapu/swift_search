@@ -1,14 +1,10 @@
-require 'elasticsearch/model'
-
 class Page < ActiveRecord::Base
 
 	extend FriendlyId
 
+  searchkick
   
 	belongs_to :site
-
-	include Elasticsearch::Model
-	include Elasticsearch::Model::Callbacks
 
 	validates :url, presence: true, uniqueness: true
 	validates :content, presence: true
@@ -18,4 +14,3 @@ class Page < ActiveRecord::Base
 
 end
 
-Page.import

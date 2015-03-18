@@ -16,7 +16,7 @@ module Crawler
 
 	def get_page(url)
 		begin
-			page = Mechanize.new.get(url)
+			return Mechanize.new.get(url)
 		rescue Exception => e
 			Rails.logger.debug "Get #{url} resulted in #{e.message}"
 		end

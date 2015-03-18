@@ -36,9 +36,7 @@ gem 'open_uri_redirections'
 gem "ruby-readability", :require => 'readability'
 gem 'nokogiri'
 gem 'mechanize'
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
-
+gem 'searchkick'
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
 
@@ -46,12 +44,14 @@ group :development, :test do
   gem 'pry'
   gem 'rspec-rails'
 	gem 'puma'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'webmock'
   gem 'factory_girl_rails'
 end
 
 group :test do
   gem 'database_cleaner'
-  gem 'webmock'
 end
 
 

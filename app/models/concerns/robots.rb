@@ -1,32 +1,36 @@
 module Robots
 
 	extend ActiveSupport::Concern
-  
+
 	def crawlable?
-		disallowed_urls.each do |path|
-			if path == "/"
-				return false
-			end
+    return true if robots_page.nil?
+    populate_robots_urls
+    return robots_urls["/"]
+  end
+
+	def populate_robots_urls
+		if page = robots_page
+			entries = robots_page.content.split("\n").select {|i| (i =~ /(Disallow:)|(Allow:)/) == 0 }
+	    entries.each do |entry|
+	      permission, url = entry.split(":")
+	      robots_urls[URI(base_url).merge(URI.encode(url.strip)).to_s] = (permission == "Allow")
+	    end
 		end
-		return true
 	end
 
-	def populate_disallowed_urls
-		robots_url = URI(base_url).merge(URI('/robots.txt'))
-		robots_page = get_page(robots_url)
-		return if robots_page.nil?
-		disallowed = robots_page.content.split("\n")
-		.select {|i| (i =~ Regexp.new("Disallow:")) == 0 }
-		disallowed_urls = disallowed.map { |i| URI.encode(i.split(":")[1].strip) }
+	def allowed?(url)
+    robots_urls[URI.encode(url)]
 	end
 
-	def allowed? (url)
-		disallowed_urls.each do |path|
-			if url.include? path
-				return false
-			end
+	private
+
+	def robots_page
+		robots_url = URI(base_url).merge(URI('robots.txt')).to_s
+		begin
+			return Mechanize.new.get(robots_url)
+		rescue Mechanize::ResponseCodeError => e
+			return nil
 		end
-		return true
 	end
 
 end
