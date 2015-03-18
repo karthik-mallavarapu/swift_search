@@ -41,7 +41,7 @@ describe Robots do
     it "allows urls for crawling" do
       url = URI(client.base_url).merge(URI("images")).to_s
       client.crawlable?
-      expect(client.allowed?(url)).to be true
+      expect(client.robots_allowed?(url)).to be true
     end
 
   end
@@ -68,27 +68,27 @@ describe Robots do
 
     it "populates disallowed urls from robots.txt" do
       url = uri_to_url("/shopping/product/", client.base_url)
-      expect(client.allowed?(url)).to be false
+      expect(client.robots_allowed?(url)).to be false
     end
 
     it "populates allowed urls from robots.txt" do
       url = uri_to_url("/mail/help/", client.base_url)
-      expect(client.allowed?(url)).to be true
+      expect(client.robots_allowed?(url)).to be true
     end
 
     it "allows url without an entry to crawl" do
       url = uri_to_url("/shopping", client.base_url)
-      expect(client.allowed?(url)).to be true
+      expect(client.robots_allowed?(url)).to be true
     end
 
     it "disallows url if url parent path is disallowed" do
       url = uri_to_url("/m/news/", client.base_url)
-      expect(client.allowed?(url)).to be false
+      expect(client.robots_allowed?(url)).to be false
     end
 
     it "allows url if it has a specific entry even if url parent path is disallowed" do
       url = uri_to_url("/m/finance", client.base_url)
-      expect(client.allowed?(url)).to be true
+      expect(client.robots_allowed?(url)).to be true
     end
 
   end

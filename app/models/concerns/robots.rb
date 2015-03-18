@@ -6,7 +6,7 @@ module Robots
 	def crawlable?
     return true if robots_page.nil?
     populate_robots_urls
-    allowed?("/")
+    robots_allowed?("/")
   end
 
 	# Populates the contents of robots.txt into a hash. Only looks for allow and
@@ -22,7 +22,7 @@ module Robots
 	end
 
 	# Returns true if url is allowed, false if url is disallowed or if url parent # path is disallowed.
-	def allowed?(url)
+	def robots_allowed?(url)
 		if ret_val = robots_urls[url]
     	return ret_val
 		else
