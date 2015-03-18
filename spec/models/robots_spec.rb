@@ -10,7 +10,7 @@ describe Robots do
 
     def initialize(url)
       @base_url = url
-      @robots_urls = Hash.new { true }
+      @robots_urls = Hash.new
     end
   end
 
@@ -20,7 +20,7 @@ describe Robots do
 
   subject(:client) { Client.new("https://www.google.com") }
 
-  context "when robots.txt returns a 404" do
+  context "when robots.txt returns a 404, " do
 
     before {
       stub_request(:get, "https://www.google.com/robots.txt").
@@ -29,7 +29,7 @@ describe Robots do
       body: "", headers: {})
     }
 
-    it "permits crawling if no robots.txt file is found" do
+    it "allows crawling if no robots.txt file is found" do
       expect(client.crawlable?).to be true
     end
 
@@ -47,7 +47,7 @@ describe Robots do
   end
 
 
-  context "when robots.txt returns a 200" do
+  context "when robots.txt returns a 200, " do
 
     before {
       body = File.read("#{Rails.root}/spec/fixtures/google.txt")
@@ -58,7 +58,7 @@ describe Robots do
       client.populate_robots_urls
     }
 
-    it "verifies if the site allows crawlers" do
+    it "allow crawlers" do
       expect(client.crawlable?).to be true
     end
 
@@ -72,13 +72,23 @@ describe Robots do
     end
 
     it "populates allowed urls from robots.txt" do
-      url = uri_to_url("/mail/help", client.base_url)
+      url = uri_to_url("/mail/help/", client.base_url)
       expect(client.allowed?(url)).to be true
     end
 
-    it "permits url without an entry to crawl" do
-      url = uri_to_url("/mail/help", client.base_url)
-      expect(client.allowed?("/shopping")).to be true
+    it "allows url without an entry to crawl" do
+      url = uri_to_url("/shopping", client.base_url)
+      expect(client.allowed?(url)).to be true
+    end
+
+    it "disallows url if url parent path is disallowed" do
+      url = uri_to_url("/m/news/", client.base_url)
+      expect(client.allowed?(url)).to be false
+    end
+
+    it "allows url if it has a specific entry even if url parent path is disallowed" do
+      url = uri_to_url("/m/finance", client.base_url)
+      expect(client.allowed?(url)).to be true
     end
 
   end
