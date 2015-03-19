@@ -35,6 +35,7 @@ gem 'active_model_serializers'
 gem 'open_uri_redirections'
 gem "ruby-readability", :require => 'readability'
 gem 'nokogiri'
+gem 'addressable'
 gem 'mechanize'
 gem 'searchkick'
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring

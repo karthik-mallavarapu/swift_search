@@ -253,6 +253,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  addressable
   angularjs-rails
   bootstrap-sass
   coffee-rails (~> 4.0.0)

@@ -13,10 +13,10 @@ module Robots
 	# disallow statements.
 	def populate_robots_urls
 		if page = robots_page
-			entries = robots_page.content.split("\n").select {|i| (i =~ /(Disallow:)|(Allow:)/) == 0 }
+			entries = robots_page.content.split("\n").select {|i| (i.strip =~ /(Disallow:)|(Allow:)/) == 0 }
 	    entries.each do |entry|
 	      permission, url = entry.split(":")
-	      robots_urls[URI(base_url).merge(URI.encode(url.strip)).to_s] = (permission == "Allow")
+	      robots_urls[Addressable::URI.parse(base_url).join(Addressable::URI.encode(url.strip)).to_s] = (permission == "Allow")
 	    end
 		end
 	end
@@ -37,7 +37,7 @@ module Robots
 
 	# Get the robots.txt page using mechanize. Returns nil on 404
 	def robots_page
-		robots_url = URI(base_url).merge(URI('robots.txt')).to_s
+		robots_url = Addressable::URI.parse(base_url).join(Addressable::URI.parse('robots.txt')).to_s
 		begin
 			return Mechanize.new.get(robots_url)
 		rescue Mechanize::ResponseCodeError => e
