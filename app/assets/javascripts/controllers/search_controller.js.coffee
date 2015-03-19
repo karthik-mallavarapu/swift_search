@@ -1,8 +1,11 @@
 angular.module("SwiftSearch")
-	.controller "SearchController", [ '$scope', '$window', '$http', '$timeout', ($scope, $window, $http, $timeout) ->
+	.controller "SearchController", [ '$scope', '$window', '$http', '$timeout', '$sce', ($scope, $window, $http, $timeout, $sce) ->
 
 		$scope.state = 'init'
 		$scope.pages = []
+
+		$scope.to_trusted = (html_code) ->
+    	$sce.trustAsHtml(html_code)
 
 		searchSuccess = (data) ->
 			$scope.pages = data.search

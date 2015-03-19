@@ -37,7 +37,8 @@ module Robots
 
 	# Get the robots.txt page using mechanize. Returns nil on 404
 	def robots_page
-		robots_url = Addressable::URI.parse(base_url).join(Addressable::URI.parse('robots.txt')).to_s
+		robots_url = Addressable::URI.parse(base_url).
+		join(Addressable::URI.parse('robots.txt')).to_s
 		begin
 			return Mechanize.new.get(robots_url)
 		rescue Mechanize::ResponseCodeError => e

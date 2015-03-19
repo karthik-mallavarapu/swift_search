@@ -24,8 +24,8 @@
 	<div>
 		<ul>
 			<li ng-repeat="page in pages">
-				<h4 class="title"><a href={{page.url}} target="_blank">{{page.title}}</a></h4>
-				<p> {{page.content}} </p>
+				<h3 class="title"><a href={{page.url}} target="_blank" ng-bind-html="to_trusted(page.title)"></a></h4>
+				<p ng-bind-html="to_trusted(page.content)"></p>
 			</li>
 		</ul>
 	</div>

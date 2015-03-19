@@ -22,7 +22,11 @@ class Site < ActiveRecord::Base
 		begin
 			self.title = page_title(self.url)
 			setup
-			crawl
+			if crawlable?
+				crawl
+			else
+				raise "Something went wrong"
+			end
 		rescue Exception => e
 			errors[:base] << e.message
 		end
@@ -36,9 +40,6 @@ class Site < ActiveRecord::Base
 		@mutex = Mutex.new
 		@robots_urls = Hash.new
     enqueue(@base_url)
-		if crawlable?
-			crawl
-		end
 	end
 
 	private

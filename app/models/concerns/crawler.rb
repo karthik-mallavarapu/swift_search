@@ -57,11 +57,7 @@ module Crawler
 					end
 		      unless invalid?(url)
 						thread_safe_op { visit_page(url) }
-						begin
-		        	index_page(url)
-						ensure
-							ActiveRecord::Base.connection_pool.release_connection
-						end
+		        index_page(url)
 		        urls = scrape_page(url)
 		        thread_safe_op { urls.each { |u| enqueue(u) } }
 		      end

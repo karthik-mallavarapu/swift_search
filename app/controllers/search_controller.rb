@@ -3,7 +3,7 @@ class SearchController < ApplicationController
 	before_action :find_site, only: [:search]
 
 	def search
-		pages = Page.search(params[:search_term]).records.where(site_id: @site.id)
+		pages = Page.search_query(params[:search_term], @site.id)
 		render json: pages
 	end
 
