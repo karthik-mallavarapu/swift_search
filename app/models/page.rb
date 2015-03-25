@@ -32,7 +32,7 @@ class Page < ActiveRecord::Base
 				return last[:highlight][attr].html_safe
 			end
 		end
-		return records.first.send(attr).html_safe
+		return records.first.send(attr).html_safe[0..300]
 	end
 
 end

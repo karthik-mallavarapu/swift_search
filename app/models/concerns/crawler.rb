@@ -6,7 +6,7 @@ module Crawler
   include Robots
 
 	EXCLUDE_PATTERN = /.(jpg|jpeg|png|gif|pdf|svg|mp4)\z/
-	URL_LIMIT = 100
+	URL_LIMIT = 50
 
 	def scrape_page(url)
 		page = get_page(url)
@@ -47,7 +47,7 @@ module Crawler
 			page.title
 		end
 	end
-
+=begin
 	def crawl
 		workers = (0..4).map do
 			Thread.new do
@@ -65,6 +65,18 @@ module Crawler
 			end
 		end
 		workers.map(&:join)
+  end
+=end
+	def crawl
+		while (!queue_empty? and page_visit_len < URL_LIMIT) do
+      url = dequeue
+      unless invalid?(url)
+				visit_page(url)
+        index_page(url)
+        urls = scrape_page(url)
+        urls.each { |u| enqueue(u) }
+      end
+    end
   end
 
 	def visited? (url)

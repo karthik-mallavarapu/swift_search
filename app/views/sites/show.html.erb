@@ -3,18 +3,21 @@
 <% title @site.title %>
 <div ng-controller="SearchController" id="search_div" data-site="<%= @site.id %>">
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-10">
 			<form name="searchForm" ng-submit="searchSite()" class="form-inline" novalidate>
 				<div class="form-group">
-					<input type="text" id="search_input" ng-model="search_term" placeholder="Enter your search query" class="form-control" required>
+					<input type="text" id="search_input" ng-model="search_term" placeholder="Enter your search query" class="form-control input-lg" required>
 				</div>
-				<button name="button" ng-disabled="searchForm.$invalid" class="btn btn-primary" >Search</button>
-				<button name="button" id="resetbtn" ng-cloak ng-disabled="state=='init'" ng-click="resetForm()" class="btn btn-danger" >Reset Form</button>
+				<div class="form-group">
+					<button name="button" ng-disabled="searchForm.$invalid" class="btn btn-primary btn-lg" >Search</button>
+				</div>
+				<!--<button name="button" id="resetbtn" ng-cloak ng-disabled="state=='init'" ng-click="resetForm()" class="btn btn-danger" >Reset Form</button>-->
 			</form>
 		</div>
+		<!--
 		<div class="col-md-4">
 			<button name="button" id="reloadbtn" ng-cloak ng-click="reloadSite()" class="btn btn-success" >Reload Site</button>
-		</div>
+		</div>-->
 		<div ng-show='state=="processing"'>
 			<%= render "partials/loading" %>
 		</div>
