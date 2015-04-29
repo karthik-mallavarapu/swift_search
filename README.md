@@ -7,7 +7,6 @@ Swift search lets you search any website instantaneously. Given a url for a webs
     * mysql
     
 ## Instructions
-
-    `bundle install`
-    `bundle exec rake db:setup`
-    `bundle exec rails s``
+   * `bundle install`
+   * `bundle exec rake db:setup`
+   * `bundle exec rails s`
