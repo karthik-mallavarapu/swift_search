@@ -2,35 +2,35 @@
 
 <% title @site.title %>
 <div ng-controller="SearchController" id="search_div" data-site="<%= @site.id %>">
-	<div class="row">
-		<div class="col-md-10">
-			<form name="searchForm" ng-submit="searchSite()" class="form-inline" novalidate>
-				<div class="form-group">
-					<input type="text" id="search_input" ng-model="search_term" placeholder="Enter your search query" class="form-control input-lg" required>
-				</div>
-				<div class="form-group">
-					<button name="button" ng-disabled="searchForm.$invalid" class="btn btn-primary btn-lg" >Search</button>
-				</div>
-				<!--<button name="button" id="resetbtn" ng-cloak ng-disabled="state=='init'" ng-click="resetForm()" class="btn btn-danger" >Reset Form</button>-->
-			</form>
-		</div>
-		<!--
-		<div class="col-md-4">
-			<button name="button" id="reloadbtn" ng-cloak ng-click="reloadSite()" class="btn btn-success" >Reload Site</button>
-		</div>-->
-		<div ng-show='state=="processing"'>
-			<%= render "partials/loading" %>
-		</div>
-	</div>
+  <div class="row">
+    <div class="col-md-10">
+      <form name="searchForm" ng-submit="searchSite()" class="form-inline" novalidate>
+        <div class="form-group">
+          <input type="text" id="search_input" ng-model="search_term" placeholder="Enter your search query" class="form-control input-lg" required>
+        </div>
+        <div class="form-group">
+          <button name="button" ng-disabled="searchForm.$invalid" class="btn btn-primary btn-lg" >Search</button>
+        </div>
+        <!--<button name="button" id="resetbtn" ng-cloak ng-disabled="state=='init'" ng-click="resetForm()" class="btn btn-danger" >Reset Form</button>-->
+      </form>
+    </div>
+    <!--
+    <div class="col-md-4">
+      <button name="button" id="reloadbtn" ng-cloak ng-click="reloadSite()" class="btn btn-success" >Reload Site</button>
+    </div>-->
+    <div ng-show='state=="processing"'>
+      <%= render "partials/loading" %>
+    </div>
+  </div>
 
 <div id="search_results" ng-cloak ng-show="state=='complete'">
-	<div>
-		<ul>
-			<li ng-repeat="page in pages">
-				<h3 class="title"><a href={{page.url}} target="_blank" ng-bind-html="to_trusted(page.title)"></a></h4>
-				<p ng-bind-html="to_trusted(page.content)"></p>
-			</li>
-		</ul>
-	</div>
+  <div>
+    <ul>
+      <li ng-repeat="page in pages">
+        <h3 class="title"><a href={{page.url}} target="_blank" ng-bind-html="to_trusted(page.title)"></a></h4>
+        <p ng-bind-html="to_trusted(page.content)"></p>
+      </li>
+    </ul>
+  </div>
 </div>
 </div>

@@ -2,50 +2,50 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .ng-dirty.ng-invalid {
-	border-color: red;
+  border-color: red;
 }
 .ng-dirty.ng-valid {
-	border-color: green;
+  border-color: green;
 }
 
 
 #new-site-form {
-	padding: 50px;
+  padding: 50px;
 }
 
 #loading-img {
-	padding-left: 150px;
+  padding-left: 150px;
 }
 
 #loading-msg {
-	padding: 20px;
-	font-size: 18px;
+  padding: 20px;
+  font-size: 18px;
 }
 
 #sample-panel {
-	padding: 30px;
-	margin-left: 50px;
+  padding: 30px;
+  margin-left: 50px;
 }
 
 .form-inline {
-	.form-group {
-		input {
-    	width: 400px;
-		}
-	}
-	.btn {
-		width: 250px;
-		margin-left: 50px;
-	}
+  .form-group {
+    input {
+      width: 400px;
+    }
+  }
+  .btn {
+    width: 250px;
+    margin-left: 50px;
+  }
 }
 
 div#search_results {
-	margin-top: 5%;
-	margin-bottom: 5%;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 #reloadbtn {
-	width: 200px;
+  width: 200px;
 }
 em {
   background: yellow;
